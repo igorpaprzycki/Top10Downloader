@@ -67,6 +67,7 @@ public class ParseApplication {
                         }
                         break;
                     default:
+                        break;
 
                 }
                 eventType = xmlPullParser.next();

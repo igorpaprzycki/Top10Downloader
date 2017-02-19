@@ -4,10 +4,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.igypap.top10downloader.model.Application;
 import com.igypap.top10downloader.model.ParseApplication;
 
 import java.io.IOException;
@@ -42,9 +44,13 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_parse)
     void onParseClick(){
-        Toast.makeText(this, "Siema", Toast.LENGTH_SHORT).show();
         ParseApplication parseApplication = new ParseApplication(mFileContents);
         parseApplication.process();
+        ArrayAdapter<Application> arrayAdapter = new ArrayAdapter<>(
+                this, R.layout.list_item, parseApplication.getApplications());
+        mListApps.setAdapter(arrayAdapter);
+        Toast.makeText(this, "Top 10 apps list parsed.", Toast.LENGTH_SHORT).show();
+
     }
 
     private class DownloadData extends AsyncTask<String, Void, String> {
