@@ -4,7 +4,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.igypap.top10downloader.model.ParseApplication;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,11 +18,16 @@ import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.xml_text_view)
-    private TextView xmlTextView;
+    private String mFileContents;
+
+    @BindView(R.id.btn_parse)
+    Button mBtnParse;
+    @BindView(R.id.xml_list_view)
+    ListView mListApps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.btn_parse)
+    void onParseClick(){
+        Toast.makeText(this, "Siema", Toast.LENGTH_SHORT).show();
+        ParseApplication parseApplication = new ParseApplication(mFileContents);
+        parseApplication.process();
+    }
 
     private class DownloadData extends AsyncTask<String, Void, String> {
-        private String mFileContents;
 
 
         @Override

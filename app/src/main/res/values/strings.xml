@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Top10Downloader</string>
+    <string name="parse_xml">Parse XML</string>
 </resources>
